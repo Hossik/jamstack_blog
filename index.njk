@@ -20,7 +20,7 @@ layout: layouts/base.njk
 </div>
 <hr>
 {% endfor %}
- <pre>{{ pagination | dump }}</pre>
+ {# <pre>{{ pagination | dump }}</pre> #}
 <div style="text-align: center;">
   {% if pagination.previous %}
     <a class="btn btn-primary float-left" href="{{ pagination.previousPageLink | url }}">← Newer Posts</a>
