@@ -16,4 +16,8 @@ module.exports = function(eleventyConfig) {
     const d = new Date(value);
     return `${d.toLocaleDateString(ISOcode, options)}`;
    })
-  };
+
+  eleventyConfig.addFilter('sanitise', value => {
+    return value.split(' ').join('-').toLowerCase();
+  })
+};
