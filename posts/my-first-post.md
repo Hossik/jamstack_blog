@@ -8,6 +8,8 @@ layout: layouts/post.njk
 ---
 # My first post
 
+edited
+
 This is awesome! ;)
 
 Isn't NetlifyCMS all what you ever wanted?
