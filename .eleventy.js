@@ -1,4 +1,8 @@
 const util = require('util');
+const algoliasearch = require('algoliasearch');
+const searchClient = algoliasearch('443BZEQ0OU', '057450ec7d33d3181194c504262f436f');
+const algoliaIndex = searchClient.initIndex('blog');
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('css');
   eleventyConfig.addPassthroughCopy('img');
@@ -19,5 +23,22 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter('sanitise', value => {
     return value.split(' ').join('-').toLowerCase();
+  })
+
+  eleventyConfig.addCollection('algolia', collection => {
+    const index = collection.getAll().filter(item => {
+      let extension = item.inputPath.split('.').pop();
+      return extension === 'md';
+    }).map(item => {
+      return {
+        objectID: item.data.page.url,
+        title: item.data.title,
+        author: item.data.author,
+        description: item.data.description,
+        url: item.data.page.url,
+        content: JSON.stringify(item.template.frontMatter.content)
+      }
+    });
+    return algoliaIndex.saveObjects(index);
   })
 };

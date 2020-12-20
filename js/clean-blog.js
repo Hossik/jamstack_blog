@@ -1,5 +1,44 @@
 document.addEventListener('DOMContentLoaded', function() {
+  const searchClient = algoliasearch('443BZEQ0OU', '057450ec7d33d3181194c504262f436f');
   
+  const search = instantsearch({
+    indexName: 'blog',
+    searchClient,
+    searchFunction: function(helper) {
+      var searchResults = $('#search_results');
+      var hits = $('#hits');
+      if (helper.state.query === '') {
+        // empty query string -> hide the search results & abort the search
+        hits.hide();
+        searchResults.hide();
+        return;
+      }
+      // perform the regular search & display the search results
+      helper.search();
+      searchResults.show();
+      hits.show();
+    }
+  });
+
+  search.addWidgets([
+    instantsearch.widgets.searchBox({
+      container: '#searchbox',
+    }),
+
+    instantsearch.widgets.hits({
+      container: '#hits',
+      templates: {
+        item: `
+          <p>
+            <a href="{{url}}">{{ title }}</a>
+          </p>
+          
+        `,
+      }
+    })
+  ]);
+
+  search.start();
 });
 
 
