@@ -10,7 +10,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('vendor');
   eleventyConfig.addPassthroughCopy('admin');
 
-  eleventyConfig.addFilter('dump', obj =>{
+  eleventyConfig.addFilter('dump', obj => {
     return util.inspect(obj);
   });
 
@@ -19,7 +19,7 @@ module.exports = function(eleventyConfig) {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const d = new Date(value);
     return `${d.toLocaleDateString(ISOcode, options)}`;
-   })
+  })
 
   eleventyConfig.addFilter('sanitise', value => {
     return value.split(' ').join('-').toLowerCase();

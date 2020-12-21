@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const searchClient = algoliasearch('443BZEQ0OU', '057450ec7d33d3181194c504262f436f');
+  const searchClient = algoliasearch('443BZEQ0OU', '5d132fb5b4d7f8fa06e183c17a97d2f8');
   
   const search = instantsearch({
     indexName: 'blog',
