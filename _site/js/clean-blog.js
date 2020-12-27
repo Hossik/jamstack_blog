@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const search = instantsearch({
     indexName: 'blog',
-    searchClient,
+    searchClient: algoliasearch(
+      '443BZEQ0OU',
+      '5d132fb5b4d7f8fa06e183c17a97d2f8'),
     searchFunction: function(helper) {
       var searchResults = $('#search_results');
       var hits = $('#hits');
@@ -28,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     instantsearch.widgets.hits({
       container: '#hits',
       templates: {
+        empty: 'No results for <q>{{ query }}</q>',
         item: `
           <p>
             <a href="{{url}}">{{ title }}</a>
